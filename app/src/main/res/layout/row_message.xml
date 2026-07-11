@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/row_message"
+    android:background="@color/bg_1"
+    style="@style/HorizontalListDivided">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        style="@style/HorizontalListDivided">
+
+        <FrameLayout
+            android:id="@+id/ascend_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small">
+
+            <ImageView
+                android:src="@drawable/px_chevron_up"
+                android:contentDescription="@string/altdescr_ascend"
+                android:tint="@color/accent_1"
+                style="@style/Icon24" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/descend_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small">
+
+            <ImageView
+                android:src="@drawable/px_chevron_down"
+                android:contentDescription="@string/altdescr_descend"
+                android:tint="@color/accent_1"
+                style="@style/Icon24" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small">
+
+            <ImageView
+                android:src="@drawable/px_message"
+                android:tint="@color/accent_2"
+                style="@style/Icon24" />
+        </FrameLayout>
+        
+        <TextView
+            android:id="@+id/row_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="16sp"
+            android:paddingStart="@dimen/space_between_elements"
+            android:singleLine="true"
+            android:ellipsize="end"
+            style="@style/Text" />
+
+    </LinearLayout>
+</LinearLayout>

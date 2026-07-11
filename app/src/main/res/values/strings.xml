@@ -1,0 +1,33 @@
+<resources>
+    <!-- Button -->
+    <string name="btn_about_okapi">About Okapi</string>
+
+    <!-- Checkbox -->
+    <string name="checkbox_lock_screen_from_falling_asleep">Keep screen awake</string>
+
+    <!-- AltDescription -->
+    <string name="altdescr_open_settings">Open Settings</string>
+    <string name="altdescr_lock_icon">Lock screen</string>
+    <string name="altdescr_save">Save</string>
+
+    <!-- APP -->
+    <string name="app_name" translatable="false">@string/product_okapi</string>
+    <string name="app_desc">Large, easy-to-read text for deaf, hard of hearing, and noisy places.</string>
+    <string name="altdescr_remove">Remove</string>
+
+    <!-- Main view -->
+    <string name="hint_edit_view">New Message</string>
+    <string name="label_no_saved_messages">No saved messages yet.</string>
+    <string name="btn_add_message">Add Message</string>
+    <string name="altdescr_switch_theme">Switch between light and dark</string>
+    <string name="altdescr_show_list">Show saved messages</string>
+
+    <!-- Settings: theme -->
+    <string name="h3_theme_dark">Dark Theme</string>
+    <string name="h3_theme_light">Light Theme</string>
+    <string name="altdescr_edit">Edit</string>
+    <string name="altdescr_ascend">Move up</string>
+    <string name="altdescr_descend">Move down</string>
+    <string name="double_tap_clear_the_message">Double tap to clear the message</string>
+</resources>
+

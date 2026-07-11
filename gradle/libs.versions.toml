@@ -1,0 +1,11 @@
+[versions]
+agp = "9.2.0"
+kotlin = "2.3.20"
+coreKtx = "1.17.0"
+
+[libraries]
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }

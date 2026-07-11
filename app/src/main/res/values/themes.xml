@@ -1,0 +1,6 @@
+<resources>
+    <!-- Base theme -->
+    <style name="Theme.Okapi" parent="Theme.Rama.Base">
+        <item name="bgColor">@color/bg_1</item>
+    </style>
+</resources>

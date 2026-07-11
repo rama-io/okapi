@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:background="@color/bg_1"
+    android:layout_height="match_parent"
+    style="@style/VerticalListDivided">
+
+    <LinearLayout style="@style/HorizontalListDivided">
+
+        <FrameLayout
+            android:id="@+id/theme_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/bg_1"
+            android:padding="@dimen/small">
+
+            <ImageView
+                android:id="@+id/theme_icon"
+                android:src="@drawable/px_sun"
+                android:tint="@color/foreground"
+                android:contentDescription="@string/altdescr_switch_theme"
+                style="@style/Icon24" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/edit_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/bg_1"
+            android:padding="@dimen/small">
+
+            <ImageView
+                android:src="@drawable/px_sort"
+                android:tint="@color/foreground"
+                android:contentDescription="@string/altdescr_edit"
+                style="@style/Icon24" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/list_btn"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/bg_1"
+            android:padding="@dimen/small">
+
+            <ImageView
+                android:src="@drawable/px_bullet_list"
+                android:tint="@color/foreground"
+                android:contentDescription="@string/altdescr_show_list"
+                style="@style/Icon24" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/delete_btn"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/bg_1"
+            android:padding="@dimen/small">
+
+            <ImageView
+                android:src="@drawable/px_trash"
+                android:tint="@color/foreground"
+                android:contentDescription="@string/altdescr_remove"
+                style="@style/Icon24" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/save_btn"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/bg_1"
+            android:padding="@dimen/small">
+
+            <ImageView
+                android:src="@drawable/px_disk"
+                android:tint="@color/foreground"
+                android:contentDescription="@string/altdescr_save"
+                style="@style/Icon24" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <FrameLayout
+            android:id="@+id/open_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/bg_1"
+            android:padding="@dimen/small">
+
+            <ImageView
+                android:src="@drawable/px_cog"
+                android:tint="@color/foreground"
+                android:contentDescription="@string/altdescr_open_settings"
+                style="@style/Icon24" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/list_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        style="@style/VerticalList">
+
+        <ListView
+            android:id="@+id/messages_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:divider="@drawable/list_divider"
+            android:dividerHeight="1dp" />
+
+        <TextView
+            android:id="@+id/empty_label"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/label_no_saved_messages"
+            style="@style/Text_Center" />
+
+        <Button
+            android:id="@+id/add_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_add_message"
+            style="@style/BTN1" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/edit_view"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:textColor="@color/h1"
+        android:textColorHint="@color/disabled"
+        android:textSize="@dimen/h1"
+        android:background="@android:color/transparent"
+        android:inputType="textMultiLine"
+        android:hint="@string/hint_edit_view" />
+
+</LinearLayout>

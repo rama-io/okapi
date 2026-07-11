@@ -1,0 +1,29 @@
+*.iml
+.gradle
+.kotlin/
+/local.properties
+.idea/
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+keystore.properties
+
+# Android build outputs
+/build/
+**/build/
+
+# APK / AAB artifacts
+*.apk
+*.aab
+*.apks
+*.xapk
+*.dm
+
+# Gradle output metadata
+**/output-metadata.json
+
+# Extensions may create this...
+.vscode/
