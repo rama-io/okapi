@@ -51,7 +51,7 @@ class MainActivity : CsActivity() {
     private var sortMode = false
 
     private val minTextSizeSp = 50f
-    private val maxTextSizeSp = 200f
+    private val maxTextSizeSp = 300f
     private val resizeHandler = Handler(Looper.getMainLooper())
     private var pendingResize: Runnable? = null
     private val resizeDebounceMs = 0L
@@ -214,6 +214,7 @@ class MainActivity : CsActivity() {
         } else {
             db.save(editingId, text)
         }
+        showList()
     }
 
     private fun deleteCurrent() {
@@ -244,14 +245,40 @@ class MainActivity : CsActivity() {
 
         val paint = TextPaint(editView.paint)
 
+        fun hasBrokenWord(layout: StaticLayout, text: String): Boolean {
+            for (i in 0 until layout.lineCount - 1) {
+                val end = layout.getLineEnd(i)
+
+                // Ignore explicit newlines
+                if (end >= text.length) continue
+                if (text[end - 1] == '\n') continue
+
+                val prev = text[end - 1]
+                val next = text[end]
+
+                if (!prev.isWhitespace() && !next.isWhitespace()) {
+                    return true
+                }
+            }
+            return false
+        }
+
         @Suppress("DEPRECATION")
         fun fits(sizeSp: Float): Boolean {
             paint.textSize = spToPx(this, sizeSp).toFloat()
+
             val layout = StaticLayout(
-                text, paint, availableWidth,
-                Layout.Alignment.ALIGN_NORMAL, 1f, 0f, false
+                text,
+                paint,
+                availableWidth,
+                Layout.Alignment.ALIGN_NORMAL,
+                1f,
+                0f,
+                false
             )
-            return layout.height <= availableHeight
+
+            return layout.height <= availableHeight &&
+                    !hasBrokenWord(layout, text)
         }
 
         if (!fits(minTextSizeSp)) {
