@@ -121,9 +121,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:gravity="center"
             android:text="@string/label_no_saved_messages"
-            style="@style/Text_Center" />
+            style="@style/H2_center" />
 
         <Button
             android:id="@+id/add_btn"

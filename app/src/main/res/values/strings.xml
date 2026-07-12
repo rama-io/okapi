@@ -12,7 +12,7 @@
 
     <!-- APP -->
     <string name="app_name" translatable="false">@string/product_okapi</string>
-    <string name="app_desc">Large, easy-to-read text for deaf, hard of hearing, and noisy places.</string>
+    <string name="app_desc">Designed to make one-on-one conversations easier for deaf and hard-of-hearing people, and anyone talking in loud or noisy places.</string>
     <string name="altdescr_remove">Remove</string>
 
     <!-- Main view -->

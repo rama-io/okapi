@@ -14,9 +14,9 @@ message on screen as large and legible as possible so it can be read at a glance
 
 ## Screenshots
 
-| Home | Settings | About |
-| - | - | - |
-| ![Home](./fastlane/metadata/android/en-US/images/phoneScreenshots/1.png) | ![Settings](./fastlane/metadata/android/en-US/images/phoneScreenshots/2.png) | ![About](./fastlane/metadata/android/en-US/images/phoneScreenshots/3.png) |
+| Home | Text Preview Dark | Text Preview Light | About |
+| - | - | - | - |
+| ![Home](./fastlane/metadata/android/en-US/images/phoneScreenshots/1.png) | ![Text Preview Dark](./fastlane/metadata/android/en-US/images/phoneScreenshots/2.png) | ![Text Preview Light](./fastlane/metadata/android/en-US/images/phoneScreenshots/3.png) | ![About](./fastlane/metadata/android/en-US/images/phoneScreenshots/4.png) |
 
 ---
 
