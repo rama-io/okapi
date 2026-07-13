@@ -2,6 +2,9 @@
 
 ## 2
 
+- Add preview screen
+- Prevent breaking words
+
 ## 1
 
 - **Large, self-sizing text**: Type your message and it automatically grows to fill the screen,
