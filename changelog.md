@@ -1,13 +1,10 @@
 # Changelog
 
-## 3
-
-- Gradle adjustments for f-droid builds
-
 ## 2
 
 - Add preview screen
 - Prevent breaking words
+- Gradle adjustments for f-droid builds
 
 ## 1
 
