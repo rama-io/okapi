@@ -82,6 +82,21 @@
         </FrameLayout>
 
         <FrameLayout
+            android:id="@+id/preview_btn"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/bg_1"
+            android:padding="@dimen/small">
+
+            <ImageView
+                android:src="@drawable/px_bullhorn"
+                android:tint="@color/foreground"
+                android:contentDescription="@string/altdescr_save"
+                style="@style/Icon24" />
+        </FrameLayout>
+
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1" />

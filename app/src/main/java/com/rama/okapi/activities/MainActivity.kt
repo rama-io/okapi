@@ -41,10 +41,11 @@ class MainActivity : CsActivity() {
     private lateinit var messagesList: ListView
     private lateinit var emptyLabel: View
     private lateinit var themeIcon: ImageView
-    private lateinit var listBtn: View
-    private lateinit var deleteBtn: View
-    private lateinit var saveBtn: View
-    private lateinit var editBtn: View
+    private lateinit var listBtn: FrameLayout
+    private lateinit var deleteBtn: FrameLayout
+    private lateinit var saveBtn: FrameLayout
+    private lateinit var editBtn: FrameLayout
+    private lateinit var previewBtn: FrameLayout
 
     private var mode = Mode.LIST
     private var editingId: Long? = null
@@ -74,6 +75,7 @@ class MainActivity : CsActivity() {
         deleteBtn = findViewById(R.id.delete_btn)
         saveBtn = findViewById(R.id.save_btn)
         editBtn = findViewById(R.id.edit_btn)
+        previewBtn = findViewById(R.id.preview_btn)
 
         updateThemeIcon()
 
@@ -172,6 +174,8 @@ class MainActivity : CsActivity() {
         deleteBtn.visibility = View.GONE
         saveBtn.visibility = View.GONE
         editBtn.visibility = View.VISIBLE
+        previewBtn.visibility = View.GONE
+
         hideKeyboard()
         refreshList()
     }
@@ -187,6 +191,8 @@ class MainActivity : CsActivity() {
         deleteBtn.visibility = View.VISIBLE
         saveBtn.visibility = View.VISIBLE
         editBtn.visibility = View.GONE
+        previewBtn.visibility = View.VISIBLE
+
         editView.requestFocus()
         showKeyboard()
         editView.post { resizeTextToFit() }
