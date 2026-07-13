@@ -30,28 +30,33 @@ import com.rama.bohio.managers.ThemeManager
 import com.rama.bohio.objects.PrefKeys
 import com.rama.bohio.util.Dimens.spToPx
 
-private enum class Mode { LIST, EDIT }
+private enum class Mode { LIST, EDIT, PREVIEW }
 
 class MainActivity : CsActivity() {
 
     private lateinit var db: DatabaseHelper
 
+    private lateinit var toolbarRow: View
     private lateinit var listView: android.widget.LinearLayout
     private lateinit var editView: EditText
     private lateinit var messagesList: ListView
     private lateinit var emptyLabel: View
     private lateinit var themeIcon: ImageView
-    private lateinit var listBtn: View
-    private lateinit var deleteBtn: View
-    private lateinit var saveBtn: View
-    private lateinit var editBtn: View
+    private lateinit var listBtn: FrameLayout
+    private lateinit var deleteBtn: FrameLayout
+    private lateinit var saveBtn: FrameLayout
+    private lateinit var editBtn: FrameLayout
+    private lateinit var previewBtn: FrameLayout
+    private lateinit var previewView: View
+    private lateinit var previewText: android.widget.TextView
+    private lateinit var previewCloseBtn: FrameLayout
 
     private var mode = Mode.LIST
     private var editingId: Long? = null
     private var sortMode = false
 
     private val minTextSizeSp = 50f
-    private val maxTextSizeSp = 200f
+    private val maxTextSizeSp = 300f
     private val resizeHandler = Handler(Looper.getMainLooper())
     private var pendingResize: Runnable? = null
     private val resizeDebounceMs = 0L
@@ -65,6 +70,7 @@ class MainActivity : CsActivity() {
         applyEdgeToEdgePadding(root)
         applyCurrentTheme(root)
 
+        toolbarRow = findViewById(R.id.toolbar_row)
         listView = findViewById(R.id.list_view)
         editView = findViewById(R.id.edit_view)
         messagesList = findViewById(R.id.messages_list)
@@ -74,6 +80,10 @@ class MainActivity : CsActivity() {
         deleteBtn = findViewById(R.id.delete_btn)
         saveBtn = findViewById(R.id.save_btn)
         editBtn = findViewById(R.id.edit_btn)
+        previewBtn = findViewById(R.id.preview_btn)
+        previewView = findViewById(R.id.preview_view)
+        previewText = findViewById(R.id.preview_text)
+        previewCloseBtn = findViewById(R.id.preview_close_btn)
 
         updateThemeIcon()
 
@@ -128,6 +138,10 @@ class MainActivity : CsActivity() {
 
         saveBtn.setOnClickListener { saveCurrent() }
 
+        previewBtn.setOnClickListener { showPreview() }
+
+        previewCloseBtn.setOnClickListener { closePreview() }
+
         findViewById<android.widget.Button>(R.id.add_btn).setOnClickListener { openEdit(null) }
 
         messagesList.setOnItemClickListener { _, _, position, _ ->
@@ -136,7 +150,9 @@ class MainActivity : CsActivity() {
 
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                if (mode == Mode.EDIT) {
+                if (mode == Mode.PREVIEW) {
+                    closePreview()
+                } else if (mode == Mode.EDIT) {
                     showList()
                 } else {
                     isEnabled = false
@@ -166,12 +182,16 @@ class MainActivity : CsActivity() {
         pendingResize?.let { resizeHandler.removeCallbacks(it) }
         mode = Mode.LIST
         editingId = null
+        toolbarRow.visibility = View.VISIBLE
         listView.visibility = View.VISIBLE
         editView.visibility = View.GONE
+        previewView.visibility = View.GONE
         listBtn.visibility = View.GONE
         deleteBtn.visibility = View.GONE
         saveBtn.visibility = View.GONE
         editBtn.visibility = View.VISIBLE
+        previewBtn.visibility = View.GONE
+
         hideKeyboard()
         refreshList()
     }
@@ -181,15 +201,44 @@ class MainActivity : CsActivity() {
         editingId = message?.id
         editView.setText(message?.text.orEmpty())
         editView.setSelection(editView.text.length)
+        toolbarRow.visibility = View.VISIBLE
         listView.visibility = View.GONE
         editView.visibility = View.VISIBLE
+        previewView.visibility = View.GONE
         listBtn.visibility = View.VISIBLE
         deleteBtn.visibility = View.VISIBLE
         saveBtn.visibility = View.VISIBLE
         editBtn.visibility = View.GONE
+        previewBtn.visibility = View.VISIBLE
+
         editView.requestFocus()
         showKeyboard()
-        editView.post { resizeTextToFit() }
+        editView.post { resizeTextToFit(editView) }
+    }
+    
+    private fun showPreview() {
+        if (editView.text.isNullOrBlank()) return
+
+        mode = Mode.PREVIEW
+        hideKeyboard()
+        editView.clearFocus()
+
+        toolbarRow.visibility = View.GONE
+        editView.visibility = View.GONE
+        previewView.visibility = View.VISIBLE
+
+        previewText.text = editView.text
+        previewView.post { resizeTextToFit(previewText) }
+    }
+
+    private fun closePreview() {
+        mode = Mode.EDIT
+        toolbarRow.visibility = View.VISIBLE
+        previewView.visibility = View.GONE
+        editView.visibility = View.VISIBLE
+
+        editView.requestFocus()
+        showKeyboard()
     }
 
     // List
@@ -214,48 +263,75 @@ class MainActivity : CsActivity() {
         } else {
             db.save(editingId, text)
         }
+        showList()
     }
 
     private fun deleteCurrent() {
         editingId?.let { db.delete(it) }
         editingId = null
         editView.setText("")
-        resizeTextToFit()
+        resizeTextToFit(editView)
     }
 
     // Text sizing - fills the available width/height without going below minTextSizeSp.
     private fun scheduleResize() {
         pendingResize?.let { resizeHandler.removeCallbacks(it) }
-        val runnable = Runnable { resizeTextToFit() }
+        val runnable = Runnable { resizeTextToFit(editView) }
         pendingResize = runnable
         resizeHandler.postDelayed(runnable, resizeDebounceMs)
     }
 
-    private fun resizeTextToFit() {
-        val text = editView.text?.toString().orEmpty()
-        val availableWidth = editView.width - editView.paddingLeft - editView.paddingRight
-        val availableHeight = editView.height - editView.paddingTop - editView.paddingBottom
+    private fun resizeTextToFit(target: android.widget.TextView) {
+        val text = target.text?.toString().orEmpty()
+        val availableWidth = target.width - target.paddingLeft - target.paddingRight
+        val availableHeight = target.height - target.paddingTop - target.paddingBottom
         if (availableWidth <= 0 || availableHeight <= 0) return
 
         if (text.isEmpty()) {
-            editView.setTextSize(TypedValue.COMPLEX_UNIT_SP, minTextSizeSp)
+            target.setTextSize(TypedValue.COMPLEX_UNIT_SP, minTextSizeSp)
             return
         }
 
-        val paint = TextPaint(editView.paint)
+        val paint = TextPaint(target.paint)
+
+        fun hasBrokenWord(layout: StaticLayout, text: String): Boolean {
+            for (i in 0 until layout.lineCount - 1) {
+                val end = layout.getLineEnd(i)
+
+                // Ignore explicit newlines
+                if (end >= text.length) continue
+                if (text[end - 1] == '\n') continue
+
+                val prev = text[end - 1]
+                val next = text[end]
+
+                if (!prev.isWhitespace() && !next.isWhitespace()) {
+                    return true
+                }
+            }
+            return false
+        }
 
         @Suppress("DEPRECATION")
         fun fits(sizeSp: Float): Boolean {
             paint.textSize = spToPx(this, sizeSp).toFloat()
+
             val layout = StaticLayout(
-                text, paint, availableWidth,
-                Layout.Alignment.ALIGN_NORMAL, 1f, 0f, false
+                text,
+                paint,
+                availableWidth,
+                Layout.Alignment.ALIGN_NORMAL,
+                1f,
+                0f,
+                false
             )
-            return layout.height <= availableHeight
+
+            return layout.height <= availableHeight &&
+                    !hasBrokenWord(layout, text)
         }
 
         if (!fits(minTextSizeSp)) {
-            editView.setTextSize(TypedValue.COMPLEX_UNIT_SP, minTextSizeSp)
+            target.setTextSize(TypedValue.COMPLEX_UNIT_SP, minTextSizeSp)
             return
         }
 
@@ -271,7 +347,7 @@ class MainActivity : CsActivity() {
                 hi = mid
             }
         }
-        editView.setTextSize(TypedValue.COMPLEX_UNIT_SP, best)
+        target.setTextSize(TypedValue.COMPLEX_UNIT_SP, best)
     }
 
     // Theme

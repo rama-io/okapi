@@ -5,7 +5,9 @@
     android:layout_height="match_parent"
     style="@style/VerticalListDivided">
 
-    <LinearLayout style="@style/HorizontalListDivided">
+    <LinearLayout
+        android:id="@+id/toolbar_row"
+        style="@style/HorizontalListDivided">
 
         <FrameLayout
             android:id="@+id/theme_btn"
@@ -82,6 +84,21 @@
         </FrameLayout>
 
         <FrameLayout
+            android:id="@+id/preview_btn"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/bg_1"
+            android:padding="@dimen/small">
+
+            <ImageView
+                android:src="@drawable/px_bullhorn"
+                android:tint="@color/foreground"
+                android:contentDescription="@string/altdescr_preview"
+                style="@style/Icon24" />
+        </FrameLayout>
+
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1" />
@@ -145,5 +162,41 @@
         android:background="@android:color/transparent"
         android:inputType="textMultiLine"
         android:hint="@string/hint_edit_view" />
+
+    <FrameLayout
+        android:id="@+id/preview_view"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/bg_1">
+
+        <TextView
+            android:id="@+id/preview_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:focusable="false"
+            android:clickable="false"
+            android:longClickable="false"
+            android:textIsSelectable="false"
+            android:textColor="@color/h1" />
+
+        <FrameLayout
+            android:id="@+id/preview_close_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|end"
+            android:background="@color/bg_1"
+            android:padding="@dimen/small">
+
+            <ImageView
+                android:src="@drawable/px_times"
+                android:tint="@color/foreground"
+                android:contentDescription="@string/altdescr_close_preview"
+                style="@style/Icon24" />
+        </FrameLayout>
+
+    </FrameLayout>
 
 </LinearLayout>

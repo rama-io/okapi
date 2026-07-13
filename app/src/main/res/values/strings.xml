@@ -21,6 +21,8 @@
     <string name="btn_add_message">Add Message</string>
     <string name="altdescr_switch_theme">Switch between light and dark</string>
     <string name="altdescr_show_list">Show saved messages</string>
+    <string name="altdescr_preview">Preview message</string>
+    <string name="altdescr_close_preview">Close preview</string>
 
     <!-- Settings: theme -->
     <string name="h3_theme_dark">Dark Theme</string>
