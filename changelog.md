@@ -1,5 +1,9 @@
 # Changelog
 
+## 3
+
+- Gradle adjustments for f-droid builds
+
 ## 2
 
 - Add preview screen
