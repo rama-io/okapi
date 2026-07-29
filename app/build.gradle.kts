@@ -15,7 +15,7 @@ android {
         applicationId = "com.rama.okapi"
         minSdk = 21
         targetSdk = 37
-        versionCode = 2
+        versionCode = 3
         versionName = "$currentYear.$versionCode"
     }
 
