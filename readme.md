@@ -55,8 +55,8 @@ Everything you type stays on your device.
   <a href="https://apps.obtainium.imranr.dev/redirect?r=obtainium://add/https://github.com/rama-io/okapi">
     <img src="https://rama-io.github.io/img/obtainium.svg" alt="Get Okapi From Obtainium">
   </a>
-  &nbsp;
-  <!-- <a href="https://f-droid.org/app/com.rama.okapi">
+  <!-- &nbsp;
+  <a href="https://f-droid.org/app/com.rama.okapi">
     <img src="https://rama-io.github.io/img/fdroid.svg" alt="Get Okapi From F-Droid">
   </a> -->
   &nbsp;
