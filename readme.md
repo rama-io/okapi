@@ -56,9 +56,9 @@ Everything you type stays on your device.
     <img src="https://rama-io.github.io/img/obtainium.svg" alt="Get Okapi From Obtainium">
   </a>
   &nbsp;
-  <a href="https://f-droid.org/app/com.rama.okapi">
+  <!-- <a href="https://f-droid.org/app/com.rama.okapi">
     <img src="https://rama-io.github.io/img/fdroid.svg" alt="Get Okapi From F-Droid">
-  </a>
+  </a> -->
   &nbsp;
   <a href="https://github.com/rama-io/okapi/releases/latest">
     <img src="https://rama-io.github.io/img/github.svg" alt="Get Okapi From GitHub">
