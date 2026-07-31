@@ -1,0 +1,12 @@
+repository: https://github.com/rama-io/okapi
+description: Built entirely in native Kotlin, Okapi runs fully on-device, avoids tracking and no internet access.
+summary: Large, easy-to-read text for deaf, hard of hearing, and noisy places.
+tags:
+    - accessibility,
+    - deaf-communication,
+    - privacy,
+    - foss
+license: GPL-3.0
+website: https://rama-io.github.io/okapi.html
+metadata_sources:
+    - github
