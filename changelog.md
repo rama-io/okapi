@@ -2,6 +2,8 @@
 
 ## 4
 
+- Add catalogue
+
 ## 3
 
 - Fix f-droid builds
