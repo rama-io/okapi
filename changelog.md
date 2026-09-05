@@ -1,5 +1,9 @@
 # Changelog
 
+## 6
+
+- Discord link now on the website
+
 ## 5
 
 - Rework about page
