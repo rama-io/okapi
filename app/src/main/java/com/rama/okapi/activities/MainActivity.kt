@@ -61,6 +61,10 @@ class MainActivity : CsActivity() {
     private var pendingResize: Runnable? = null
     private val resizeDebounceMs = 0L
 
+    private val autosaveHandler = Handler(Looper.getMainLooper())
+    private var pendingAutosave: Runnable? = null
+    private val autosaveDebounceMs = 600L
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.view_main)
@@ -129,6 +133,9 @@ class MainActivity : CsActivity() {
                 } else {
                     scheduleResize()
                 }
+                if (mode == Mode.EDIT) {
+                    scheduleAutosave()
+                }
             }
         })
 
@@ -178,8 +185,18 @@ class MainActivity : CsActivity() {
         updateThemeIcon()
     }
 
+    override fun onPause() {
+        super.onPause()
+        if (mode == Mode.EDIT || mode == Mode.PREVIEW) {
+            flushAutosave()
+        }
+    }
+
     private fun showList() {
         pendingResize?.let { resizeHandler.removeCallbacks(it) }
+        if (mode == Mode.EDIT) {
+            flushAutosave()
+        }
         mode = Mode.LIST
         editingId = null
         toolbarRow.visibility = View.VISIBLE
@@ -219,6 +236,7 @@ class MainActivity : CsActivity() {
     private fun showPreview() {
         if (editView.text.isNullOrBlank()) return
 
+        flushAutosave()
         mode = Mode.PREVIEW
         hideKeyboard()
         editView.clearFocus()
@@ -257,20 +275,39 @@ class MainActivity : CsActivity() {
     }
 
     private fun saveCurrent() {
-        val text = editView.text.toString()
-        if (text.isBlank()) {
-            editingId?.let { db.delete(it) }
-        } else {
-            db.save(editingId, text)
-        }
+        performSave()
         showList()
     }
 
     private fun deleteCurrent() {
+        pendingAutosave?.let { autosaveHandler.removeCallbacks(it) }
         editingId?.let { db.delete(it) }
         editingId = null
         editView.setText("")
         resizeTextToFit(editView)
+    }
+
+    private fun performSave() {
+        val text = editView.text.toString()
+        if (text.isBlank()) {
+            editingId?.let { db.delete(it) }
+            editingId = null
+        } else {
+            editingId = db.save(editingId, text)
+        }
+    }
+
+    private fun scheduleAutosave() {
+        pendingAutosave?.let { autosaveHandler.removeCallbacks(it) }
+        val runnable = Runnable { performSave() }
+        pendingAutosave = runnable
+        autosaveHandler.postDelayed(runnable, autosaveDebounceMs)
+    }
+
+    private fun flushAutosave() {
+        pendingAutosave?.let { autosaveHandler.removeCallbacks(it) }
+        pendingAutosave = null
+        performSave()
     }
 
     // Text sizing - fills the available width/height without going below minTextSizeSp.

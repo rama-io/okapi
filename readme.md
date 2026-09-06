@@ -44,8 +44,6 @@ Everything you type stays on your device.
   for reading outdoors on a sunny day versus in a dim indoor conversation. Both themes can be choose in Settings.
 - **Quick clear**: Double-tap the message while editing to instantly clear it and start over
   (can be turned off in Settings).
-- **Explicit save**: Nothing is written to your saved messages until you tap Save, so you're
-  always in control of what gets kept.
 
 ---
 
@@ -71,14 +69,6 @@ Everything you type stays on your device.
 
 **Okapi** is Free Software. You are free to use, study, share, and improve it under the terms of
 the **GNU General Public License v3** or later.
-
----
-
-## Tested Devices
-
-| Device | OS | Status |
-| - | - | - |
-| Pixel 8 Pro | Android 17 | Y |
 
 ---
 

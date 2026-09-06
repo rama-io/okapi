@@ -1,5 +1,9 @@
 # Changelog
 
+## 7
+
+- Autosaved after 600ms to avoid data lost
+
 ## 6
 
 - Discord link now on the website
