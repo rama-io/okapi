@@ -1,5 +1,9 @@
 # Changelog
 
+## 8
+
+- Prevent unwanted permissions to ever be added by third parties dependencies
+
 ## 7
 
 - Autosaved after 600ms to avoid data lost
