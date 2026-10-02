@@ -26,6 +26,7 @@ import com.rama.okapi.managers.PrefsManager
 import com.rama.bohio.R as BohioR
 import android.view.GestureDetector
 import android.view.MotionEvent
+import android.widget.Toast
 import com.rama.bohio.managers.ThemeManager
 import com.rama.bohio.objects.PrefKeys
 import com.rama.bohio.util.Dimens.spToPx
@@ -110,7 +111,7 @@ class MainActivity : CsActivity() {
             this,
             object : GestureDetector.SimpleOnGestureListener() {
                 override fun onDoubleTap(e: MotionEvent): Boolean {
-                    if (prefs.getBoolean(PrefsManager.FileKeys.PREF_QUICK_ERASE, true)) {
+                    if (prefs.getBoolean(PrefsManager.FileKeys.PREF_QUICK_ERASE, false)) {
                         deleteCurrent()
                     }
                     return true
@@ -232,7 +233,7 @@ class MainActivity : CsActivity() {
         showKeyboard()
         editView.post { resizeTextToFit(editView) }
     }
-    
+
     private fun showPreview() {
         if (editView.text.isNullOrBlank()) return
 
@@ -276,7 +277,7 @@ class MainActivity : CsActivity() {
 
     private fun saveCurrent() {
         performSave()
-        showList()
+        Toast.makeText(this, "Saved successfully", Toast.LENGTH_SHORT).show()
     }
 
     private fun deleteCurrent() {
