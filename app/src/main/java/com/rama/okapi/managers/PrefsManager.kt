@@ -53,7 +53,7 @@ class PrefsManager private constructor(context: Context) : BohioPrefsManager(con
             .putString(FileKeys.PREF_DARK_THEME, PrefTheme.MELANGE)
             .putString(FileKeys.PREF_LIGHT_THEME, PrefTheme.CATPPUCCIN_LATTE)
             .putBoolean(FileKeys.PREF_LIGHT_MODE, false)
-            .putBoolean(FileKeys.PREF_QUICK_ERASE, true)
+            .putBoolean(FileKeys.PREF_QUICK_ERASE, false)
             .putBoolean(PrefKeys.SYSTEM_PREVENT_SLEEP, true)
     }
 

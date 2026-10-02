@@ -1,5 +1,12 @@
 # Changelog
 
+## 8
+
+- Prevent unwanted permissions to ever be added by third parties dependencies
+- New radio and checkboxes from mako zero
+- Prevent closing the message when saving
+- Double tap to erase is not the default anymore
+
 ## 7
 
 - Autosaved after 600ms to avoid data lost

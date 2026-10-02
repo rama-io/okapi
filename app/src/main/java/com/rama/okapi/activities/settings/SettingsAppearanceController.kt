@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.view.View
-import android.widget.RadioGroup
 import android.widget.TextView
 import com.rama.okapi.R
 import com.rama.bohio.R as BohioR
@@ -12,6 +11,7 @@ import com.rama.okapi.activities.SettingsActivity
 import com.rama.bohio.managers.FontManager
 import com.rama.bohio.objects.PrefFontStyle
 import com.rama.bohio.objects.PrefTheme
+import com.rama.bohio.widgets.WdRadioGroup
 import java.io.File
 import java.io.FileOutputStream
 import com.rama.bohio.widgets.WdRange
@@ -41,7 +41,7 @@ class SettingsAppearanceController(private val activity: SettingsActivity) {
     }
 
     private fun setupFontStyle() {
-        val group = activity.findViewById<RadioGroup>(R.id.font_style_group)
+        val group = activity.findViewById<WdRadioGroup>(R.id.font_style_group)
         val customContainer = activity.findViewById<View>(R.id.custom_font_container)
 
         when (prefs.getFontStyle()) {
@@ -53,27 +53,29 @@ class SettingsAppearanceController(private val activity: SettingsActivity) {
         customContainer.visibility =
             if (prefs.getFontStyle() == PrefFontStyle.CUSTOM) View.VISIBLE else View.GONE
 
-        group.setOnCheckedChangeListener { _, id ->
-            when (id) {
-                R.id.font_jersey -> {
-                    customContainer.visibility = View.GONE
-                    prefs.setFontStyle(PrefFontStyle.JERSEY_25)
-                    activity.refreshFont()
-                }
+        group.setOnCheckedChangeListener(object : WdRadioGroup.OnCheckedChangeListener {
+            override fun onCheckedChanged(group: WdRadioGroup, checkedId: Int) {
+                when (checkedId) {
+                    R.id.font_jersey -> {
+                        customContainer.visibility = View.GONE
+                        prefs.setFontStyle(PrefFontStyle.JERSEY_25)
+                        activity.refreshFont()
+                    }
 
-                R.id.font_default -> {
-                    customContainer.visibility = View.GONE
-                    prefs.setFontStyle(PrefFontStyle.DEFAULT)
-                    activity.refreshFont()
-                }
+                    R.id.font_default -> {
+                        customContainer.visibility = View.GONE
+                        prefs.setFontStyle(PrefFontStyle.DEFAULT)
+                        activity.refreshFont()
+                    }
 
-                R.id.font_custom -> {
-                    customContainer.visibility = View.VISIBLE
-                    prefs.setFontStyle(PrefFontStyle.CUSTOM)
-                    activity.refreshFont()
+                    R.id.font_custom -> {
+                        customContainer.visibility = View.VISIBLE
+                        prefs.setFontStyle(PrefFontStyle.CUSTOM)
+                        activity.refreshFont()
+                    }
                 }
             }
-        }
+        })
 
         activity.findViewById<View>(R.id.font_custom_pick_btn).setOnClickListener {
             openFontPicker()
@@ -117,8 +119,8 @@ class SettingsAppearanceController(private val activity: SettingsActivity) {
     }
 
     private fun setupTheme() {
-        val darkGroup = activity.findViewById<RadioGroup>(R.id.themes_group)
-        val lightGroup = activity.findViewById<RadioGroup>(R.id.themes_light_group)
+        val darkGroup = activity.findViewById<WdRadioGroup>(R.id.themes_group)
+        val lightGroup = activity.findViewById<WdRadioGroup>(R.id.themes_light_group)
 
         when (prefs.getPreferredDarkTheme()) {
             PrefTheme.TEYIN -> darkGroup.check(R.id.theme_teyin)
@@ -138,31 +140,35 @@ class SettingsAppearanceController(private val activity: SettingsActivity) {
             else -> lightGroup.check(R.id.theme_catppuccin_latte)
         }
 
-        darkGroup.setOnCheckedChangeListener { _, id ->
-            val theme = when (id) {
-                R.id.theme_teyin -> PrefTheme.TEYIN
-                R.id.theme_mako -> PrefTheme.MAKO
-                R.id.theme_rama -> PrefTheme.RAMA
-                R.id.theme_catppuccin_mocha -> PrefTheme.CATPPUCCIN_MOCHA
-                R.id.theme_dracula -> PrefTheme.DRACULA
-                R.id.theme_melange -> PrefTheme.MELANGE
-                R.id.theme_tokyo_night -> PrefTheme.TOKYO_NIGHT
-                R.id.theme_mono_dark -> PrefTheme.MONO_DARK
-                else -> PrefTheme.MELANGE
+        darkGroup.setOnCheckedChangeListener(object : WdRadioGroup.OnCheckedChangeListener {
+            override fun onCheckedChanged(group: WdRadioGroup, checkedId: Int) {
+                val theme = when (checkedId) {
+                    R.id.theme_teyin -> PrefTheme.TEYIN
+                    R.id.theme_mako -> PrefTheme.MAKO
+                    R.id.theme_rama -> PrefTheme.RAMA
+                    R.id.theme_catppuccin_mocha -> PrefTheme.CATPPUCCIN_MOCHA
+                    R.id.theme_dracula -> PrefTheme.DRACULA
+                    R.id.theme_melange -> PrefTheme.MELANGE
+                    R.id.theme_tokyo_night -> PrefTheme.TOKYO_NIGHT
+                    R.id.theme_mono_dark -> PrefTheme.MONO_DARK
+                    else -> PrefTheme.MELANGE
+                }
+                prefs.setPreferredDarkTheme(theme)
+                activity.applyCurrentTheme()
             }
-            prefs.setPreferredDarkTheme(theme)
-            activity.applyCurrentTheme()
-        }
+        })
 
-        lightGroup.setOnCheckedChangeListener { _, id ->
-            val theme = when (id) {
-                R.id.theme_catppuccin_latte -> PrefTheme.CATPPUCCIN_LATTE
-                R.id.theme_mono_light -> PrefTheme.MONO_LIGHT
-                else -> PrefTheme.CATPPUCCIN_LATTE
+        lightGroup.setOnCheckedChangeListener(object : WdRadioGroup.OnCheckedChangeListener {
+            override fun onCheckedChanged(group: WdRadioGroup, checkedId: Int) {
+                val theme = when (checkedId) {
+                    R.id.theme_catppuccin_latte -> PrefTheme.CATPPUCCIN_LATTE
+                    R.id.theme_mono_light -> PrefTheme.MONO_LIGHT
+                    else -> PrefTheme.CATPPUCCIN_LATTE
+                }
+                prefs.setPreferredLightTheme(theme)
+                activity.applyCurrentTheme()
             }
-            prefs.setPreferredLightTheme(theme)
-            activity.applyCurrentTheme()
-        }
+        })
     }
 
     private fun setupUiScale() {

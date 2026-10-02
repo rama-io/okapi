@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/settings_root"
-    android:background="@color/bg_1"
+    style="@style/VerticalListDivided"
     android:layout_height="match_parent"
-    style="@style/VerticalListDivided">
+    android:background="@color/bg_1">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -16,173 +16,170 @@
         <LinearLayout style="@style/VerticalList">
 
             <TextView
+                style="@style/H2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/activity_settings_label"
-                style="@style/H2" />
+                android:text="@string/activity_settings_label" />
 
-            <!--Dark Theme-->
             <com.rama.bohio.widgets.WdCollapsibleSection
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:key="settings:section:themes"
+                app:defaultExpanded="true"
                 app:header="@string/h3_theme_dark"
-                app:defaultExpanded="true">
+                app:key="settings:section:themes">
 
-                <RadioGroup
+                <com.rama.bohio.widgets.WdRadioGroup
                     android:id="@+id/themes_group"
-                    style="@style/RadioGroup">
+                    style="@style/VerticalList_BG2">
 
-                    <RadioButton
+                    <com.rama.bohio.widgets.WdRadio
                         android:id="@+id/theme_teyin"
-                        android:text="@string/product_teyin"
-                        style="@style/Radio" />
+                        style="@style/Radio"
+                        android:text="@string/product_teyin" />
 
-                    <RadioButton
+                    <com.rama.bohio.widgets.WdRadio
                         android:id="@+id/theme_mako"
-                        android:text="@string/product_mako"
-                        style="@style/Radio" />
+                        style="@style/Radio"
+                        android:text="@string/product_mako" />
 
-                    <RadioButton
+                    <com.rama.bohio.widgets.WdRadio
                         android:id="@+id/theme_rama"
-                        android:text="@string/product_rama"
-                        style="@style/Radio" />
+                        style="@style/Radio"
+                        android:text="@string/product_rama" />
 
-                    <RadioButton
+                    <com.rama.bohio.widgets.WdRadio
                         android:id="@+id/theme_catppuccin_mocha"
-                        android:text="@string/product_catppuccin_name"
-                        style="@style/Radio" />
+                        style="@style/Radio"
+                        android:text="@string/product_catppuccin_name" />
 
-                    <RadioButton
+                    <com.rama.bohio.widgets.WdRadio
                         android:id="@+id/theme_dracula"
-                        android:text="@string/product_dracula_name"
-                        style="@style/Radio" />
+                        style="@style/Radio"
+                        android:text="@string/product_dracula_name" />
 
-                    <RadioButton
+                    <com.rama.bohio.widgets.WdRadio
                         android:id="@+id/theme_melange"
-                        android:text="@string/product_melange_name"
-                        style="@style/Radio" />
+                        style="@style/Radio"
+                        android:text="@string/product_melange_name" />
 
-                    <RadioButton
+                    <com.rama.bohio.widgets.WdRadio
                         android:id="@+id/theme_tokyo_night"
-                        android:text="@string/product_tokyo_name"
-                        style="@style/Radio" />
+                        style="@style/Radio"
+                        android:text="@string/product_tokyo_name" />
 
-                    <RadioButton
+                    <com.rama.bohio.widgets.WdRadio
                         android:id="@+id/theme_mono_dark"
-                        android:text="@string/radio_theme_mono_dark"
-                        style="@style/Radio" />
-                </RadioGroup>
+                        style="@style/Radio"
+                        android:text="@string/radio_theme_mono_dark" />
+                </com.rama.bohio.widgets.WdRadioGroup>
             </com.rama.bohio.widgets.WdCollapsibleSection>
 
             <!--Light Theme-->
             <com.rama.bohio.widgets.WdCollapsibleSection
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:key="settings:section:themes_light"
+                app:defaultExpanded="true"
                 app:header="@string/h3_theme_light"
-                app:defaultExpanded="true">
+                app:key="settings:section:themes_light">
 
-                <RadioGroup
+                <com.rama.bohio.widgets.WdRadioGroup
                     android:id="@+id/themes_light_group"
-                    style="@style/RadioGroup">
+                    style="@style/VerticalList_BG2">
 
-                    <RadioButton
+                    <com.rama.bohio.widgets.WdRadio
                         android:id="@+id/theme_catppuccin_latte"
-                        android:text="@string/product_catppuccin_latte_name"
-                        style="@style/Radio" />
+                        style="@style/Radio"
+                        android:text="@string/product_catppuccin_latte_name" />
 
-                    <RadioButton
+                    <com.rama.bohio.widgets.WdRadio
                         android:id="@+id/theme_mono_light"
-                        android:text="@string/radio_theme_mono_light"
-                        style="@style/Radio" />
-                </RadioGroup>
+                        style="@style/Radio"
+                        android:text="@string/radio_theme_mono_light" />
+                </com.rama.bohio.widgets.WdRadioGroup>
             </com.rama.bohio.widgets.WdCollapsibleSection>
 
-            <!--Fonts-->
             <com.rama.bohio.widgets.WdCollapsibleSection
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:key="settings:section:fonts"
+                app:defaultExpanded="true"
                 app:header="@string/h3_fonts"
-                app:defaultExpanded="true">
+                app:key="settings:section:fonts">
 
-                <RadioGroup
+                <com.rama.bohio.widgets.WdRadioGroup
                     android:id="@+id/font_style_group"
-                    style="@style/RadioGroup">
+                    style="@style/VerticalList_BG2">
 
-                    <RadioButton
+                    <com.rama.bohio.widgets.WdRadio
                         android:id="@+id/font_default"
-                        android:text="@string/radio_default_system"
-                        style="@style/Radio" />
+                        style="@style/Radio"
+                        android:text="@string/radio_default_system" />
 
-                    <RadioButton
+                    <com.rama.bohio.widgets.WdRadio
                         android:id="@+id/font_jersey"
-                        android:text="@string/product_jersey_name"
-                        style="@style/Radio" />
+                        style="@style/Radio"
+                        android:text="@string/product_jersey_name" />
 
-                    <RadioButton
+                    <com.rama.bohio.widgets.WdRadio
                         android:id="@+id/font_custom"
-                        android:text="@string/radio_font_custom"
-                        style="@style/Radio" />
-                </RadioGroup>
+                        style="@style/Radio"
+                        android:text="@string/radio_font_custom" />
+                </com.rama.bohio.widgets.WdRadioGroup>
 
                 <LinearLayout
                     android:id="@+id/custom_font_container"
-                    android:visibility="gone"
-                    style="@style/VerticalListDivided_BG2">
+                    style="@style/VerticalListDivided_BG2"
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/font_custom_name_label"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/foreground"
-                        android:textSize="16sp"
                         android:padding="16sp"
-                        android:text="@string/filepicker_font_custom_none" />
+                        android:text="@string/filepicker_font_custom_none"
+                        android:textColor="@color/foreground"
+                        android:textSize="16sp" />
 
                     <Button
                         android:id="@+id/font_custom_pick_btn"
-                        android:text="@string/btn_font_custom_pick"
-                        style="@style/BTN2" />
+                        style="@style/BTN2"
+                        android:text="@string/btn_font_custom_pick" />
 
                 </LinearLayout>
 
             </com.rama.bohio.widgets.WdCollapsibleSection>
 
-            <!--System-->
             <com.rama.bohio.widgets.WdCollapsibleSection
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:key="settings:section:system"
+                app:defaultExpanded="true"
                 app:header="@string/h3_system"
-                app:defaultExpanded="true">
+                app:key="settings:section:system">
 
                 <com.rama.bohio.widgets.WdCheckbox
                     android:id="@+id/show_system_bar"
-                    android:text="@string/checkbox_show_system_bar"
-                    style="@style/Checkbox" />
+                    style="@style/BlockFlow"
+                    android:text="@string/checkbox_show_system_bar" />
 
                 <com.rama.bohio.widgets.WdCheckbox
                     android:id="@+id/keep_screen_awake"
-                    android:text="@string/checkbox_lock_screen_from_falling_asleep"
-                    style="@style/Checkbox" />
+                    style="@style/BlockFlow"
+                    android:text="@string/checkbox_lock_screen_from_falling_asleep" />
 
                 <com.rama.bohio.widgets.WdCheckbox
                     android:id="@+id/quick_erase"
-                    android:text="@string/double_tap_clear_the_message"
-                    style="@style/Checkbox" />
+                    style="@style/BlockFlow"
+                    android:text="@string/double_tap_clear_the_message" />
 
                 <LinearLayout style="@style/VerticalListDivided_BG2">
 
                     <TextView
-                        android:text="@string/label_zoom"
-                        style="@style/Text" />
+                        style="@style/Text"
+                        android:text="@string/label_zoom" />
 
                     <com.rama.bohio.widgets.WdRange
                         android:id="@+id/zoom"
-                        app:valuesArray="@array/ui_scale_steps"
-                        style="@style/BlockFlow" />
+                        style="@style/BlockFlow"
+                        app:valuesArray="@array/ui_scale_steps" />
 
                 </LinearLayout>
             </com.rama.bohio.widgets.WdCollapsibleSection>
@@ -191,13 +188,13 @@
             <com.rama.bohio.widgets.WdCollapsibleSection
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:key="settings:section:language"
+                app:defaultExpanded="true"
                 app:header="@string/h3_language"
-                app:defaultExpanded="true">
+                app:key="settings:section:language">
 
-                <RadioGroup
+                <com.rama.bohio.widgets.WdRadioGroup
                     android:id="@+id/language_group"
-                    style="@style/RadioGroup" />
+                    style="@style/VerticalList_BG2" />
             </com.rama.bohio.widgets.WdCollapsibleSection>
         </LinearLayout>
     </ScrollView>
@@ -206,11 +203,11 @@
 
     <Button
         android:id="@+id/about_button"
-        android:text="@string/btn_about_okapi"
-        style="@style/BTN1" />
+        style="@style/BTN1"
+        android:text="@string/btn_about_okapi" />
 
     <Button
         android:id="@+id/close_button"
-        android:text="@string/btn_go_back"
-        style="@style/BTN1" />
+        style="@style/BTN1"
+        android:text="@string/btn_go_back" />
 </LinearLayout>
